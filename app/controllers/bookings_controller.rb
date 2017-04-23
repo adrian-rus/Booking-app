@@ -1,4 +1,6 @@
+require 'my_logger'
 class BookingsController < ApplicationController
+  
   before_filter :authenticate_user!
   
   respond_to :html, :xml, :json
@@ -21,6 +23,9 @@ class BookingsController < ApplicationController
     else
       render 'new'
     end
+    
+    logger = MyLogger.instance
+    logger.logInformation("A new booking has been created on: " + @booking.start_time.to_s + " for " + @booking.duration.to_s + " hours.") 
     
   end
 
@@ -58,6 +63,17 @@ class BookingsController < ApplicationController
       render 'edit'
     end
   end
+  
+=begin
+  def userbookings
+    user = User.find_by_user_id(current_user.id)
+    if user.booking_id.nil?
+      redirect_to "/zones/"
+    else
+      @user = User.find_by_user_id(current_user.id)
+      redirect_to zone_bookings_path(@zone)
+    end
+=end
 
   private
 

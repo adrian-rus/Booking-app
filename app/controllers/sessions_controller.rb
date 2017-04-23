@@ -4,4 +4,5 @@ class SessionsController < Devise::SessionsController
         "/signedinuserprofile"
         # here we provide the path for the user's profile
     end
+    
 end

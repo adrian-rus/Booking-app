@@ -1,0 +1,42 @@
+<nav class="nav navbar-inverse">
+	<div class="nav navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myCollapsingList">
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+		
+		<%= image_tag("logo.png", alt: "VR logo", class:'navbar-brand img-responsive') %>
+		<a class="navbar-brand" href="/">VR World</a>
+	</div>
+	<div class="collapse navbar-collapse" id="myCollapsingList">
+		<ul class="nav navbar-nav navbar-right">
+			<li >
+				<a href="/">Home</a>
+			</li>
+			<li>
+				<a href="/zones">Zones</a>
+			</li>
+			
+			<!-- displaying the profile link only if the user is logged in -->
+			<% if user_signed_in? %>
+			<li>
+				<a href="/signedinuserprofile">My Profile</a>
+			</li>
+			
+			<li>
+				<a href="/userbookings">My Bookings</a>
+			</li>
+			<% end %>
+			
+			<!-- displaying a link to all profiles if user is admin -->
+			<% if user_signed_in? && current_user.admin?%>
+			<li>
+				<a href="/profiles">All Profiles</a>
+			</li>
+			
+			<% end %>
+		</ul>
+	</div>
+
+</nav>

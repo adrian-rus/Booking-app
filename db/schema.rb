@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170423175905) do
+ActiveRecord::Schema.define(version: 20170423182614) do
 
   create_table "bookings", force: :cascade do |t|
     t.datetime "start_time"
@@ -52,8 +52,10 @@ ActiveRecord::Schema.define(version: 20170423175905) do
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
     t.boolean  "admin",                  default: false
+    t.integer  "booking_id"
   end
 
+  add_index "users", ["booking_id"], name: "index_users_on_booking_id"
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 

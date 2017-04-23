@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   
   get '/signedinuserprofile' => 'profiles#signedinuserprofile'
   
+  get '/userbookings' => 'bookings#userbookings'
+  
   get 'bookings/index'
 
   get 'bookings/show'
