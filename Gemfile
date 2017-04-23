@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
-
+# add devise gem for authentication
+gem 'devise'
 # added responders gem 
 gem 'responders', '~> 2.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

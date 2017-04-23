@@ -1,4 +1,6 @@
 class BookingsController < ApplicationController
+  before_filter :authenticate_user!
+  
   respond_to :html, :xml, :json
   before_action :find_zone
   

@@ -1,0 +1,14 @@
+<div class="container-fluid bg-info">
+    <% if user_signed_in? %>
+    <div class="text-right">
+      Signed in as... <%= current_user.email %>
+      (<%= link_to 'Sign out', destroy_user_session_path,
+        :method => :delete%>)
+    </div>
+  <% else %>
+  <div class="text-right">
+    <%= link_to 'Register', new_user_registration_path %> or
+    <%= link_to 'Sign in', new_user_session_path %>
+  </div>
+  <% end %>
+</div>
