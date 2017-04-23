@@ -1,29 +1,40 @@
-<p id="notice"><%= notice %></p>
+<div class="panel container">
+  
+  <div class="panel-header">
+     <%= image_tag(@profile.avatar, alt: "default avatar", class: 'img-responsive') %>
+  </div>
+  
+  <div class="panel-body">
+    <p>
+      <strong>First name:</strong>
+      <%= @profile.firstname %>
+    </p>
+    
+    <p>
+      <strong>Last name:</strong>
+      <%= @profile.lastname %>
+    </p>
+    
+    <p>
+      <strong>Address:</strong>
+      <%= @profile.address %>
+    </p>
+    
+    <p>
+      <strong>User:</strong>
+      <%= @profile.firstname %>
+      <%= @profile.lastname %>
+    </p>
+  </div>
 
-<p>
-  <strong>Firstname:</strong>
-  <%= @profile.firstname %>
-</p>
+    <%= link_to 'Edit Profile', edit_profile_path(@profile), class:'btn btn-warning'%>
+  
+  			<!-- displaying a link to all profiles if user is admin -->
+  	<% if user_signed_in? && current_user.admin?%>
+  		
+			<%= link_to '<< Back to all profiles', profiles_path, class: 'btn btn-success' %>
+		
+		<% end %>
 
-<p>
-  <strong>Lastname:</strong>
-  <%= @profile.lastname %>
-</p>
+</div>
 
-<p>
-  <strong>Address:</strong>
-  <%= @profile.address %>
-</p>
-
-<p>
-  <strong>Avatar:</strong>
-  <%= @profile.avatar %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @profile.user %>
-</p>
-
-<%= link_to 'Edit', edit_profile_path(@profile) %> |
-<%= link_to 'Back', profiles_path %>

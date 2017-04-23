@@ -1,11 +1,22 @@
-<%= form_for([@zone, @booking]) do |f| %>
-  <p>
-    <%= f.label 'start_time', 'Start time' %>
-    <%= f.datetime_select :start_time, { minute_step: 15 } %>
-  </p>
-  <p>
-    <%= f.label 'duration', 'Length of booking in hours' %>
-    <%= f.number_field 'duration', min: 1 %>
-  </p>
-  <%= f.submit 'Submit' %>
+<%= form_for([@zone, @booking], html: {class: "form-horizontal"}) do |f| %>
+
+  <div class="form-group form-inline">
+    <%= f.label 'start_time', 'Start time', class:'col-sm-2 control-label'%>
+    <div class="col-sm-10">
+       <%= f.datetime_select :start_time, { minute_step: 15 }, class:'form-control' %>
+    </div>
+  </div>
+    
+  <div class="form-group">
+    <%= f.label 'duration', 'Length of booking in hours', class:'col-sm-2 control-label' %>
+    <div class="col-sm-8">
+       <%= f.number_field 'duration', min: 1, class:'form-control' %> 
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit %>
+    </div>
+  </div>
 <% end %> 

@@ -1,5 +1,5 @@
 <% if @booking.errors.any? %>
-  <div class="errors">
+  <div class="errors bg-warning">
     <h3><%= pluralize(@booking.errors.count, 'error') %>
       prohibited this booking from being saved:
     </h3>

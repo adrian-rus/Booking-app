@@ -1,6 +1,14 @@
 source 'https://rubygems.org'
+
+#adding bootstrap
+gem 'bootstrap-sass', '~> 3.2.0'
+gem 'autoprefixer-rails'
+# adding font-awesome
+gem 'font-awesome-sass', '~> 4.7.0'
 # add devise gem for authentication
 gem 'devise'
+# add observers pattern
+gem 'rails-observers'
 # added responders gem 
 gem 'responders', '~> 2.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

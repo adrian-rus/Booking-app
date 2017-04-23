@@ -37,9 +37,13 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     arel (6.0.4)
+    autoprefixer-rails (6.7.7.2)
+      execjs
     bcrypt (3.1.11)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-sass (3.2.0.2)
+      sass (~> 3.2)
     builder (3.2.3)
     byebug (9.0.6)
     coffee-rails (4.1.1)
@@ -59,6 +63,8 @@ GEM
       warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.7.0)
+    font-awesome-sass (4.7.0)
+      sass (>= 3.2)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     i18n (0.8.0)
@@ -105,6 +111,8 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
+    rails-observers (0.1.2)
+      activemodel (~> 4.0)
     railties (4.2.5)
       actionpack (= 4.2.5)
       activesupport (= 4.2.5)
@@ -156,12 +164,16 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  autoprefixer-rails
+  bootstrap-sass (~> 3.2.0)
   byebug
   coffee-rails (~> 4.1.0)
   devise
+  font-awesome-sass (~> 4.7.0)
   jbuilder (~> 2.0)
   jquery-rails
   rails (= 4.2.5)
+  rails-observers
   responders (~> 2.0)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)

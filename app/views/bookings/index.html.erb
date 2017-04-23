@@ -1,11 +1,12 @@
 <h3> Bookings for <%= @zone.name %></h3>
-<table class="bookings_table">
+<table class="bookings_table table table-responsive table-hover">
   <tr>
     <th>Start</th>
     <th>End</th>
     <th>Duration</th>
     <th>Cost</th>
     <th>Actions</th>
+    <th colspan='7'></th>
   </tr>
   
   <% @bookings.each do |booking| %>
@@ -20,15 +21,16 @@
       <%= booking.duration %> hours
     </td>
      <td>
-     euro <%= (booking.calculate_cost) %>
+     <%= icon('euro', class:'strong')%> <%= (booking.calculate_cost) %>
     </td>
     
-    <td><%= link_to "Show Details", zone_booking_path(@zone, booking) %>
+    <td><%= link_to "Show Details", zone_booking_path(@zone, booking), class:'btn btn-info' %>
     </td>
-    <td><%= link_to "Delete", zone_booking_path(@zone, booking), data: { confirm: 'Are you sure?' }, method: :delete %>
+    <td><%= link_to "Amend", edit_zone_booking_path(@zone, booking), class:'btn btn-warning' %>
     </td>
-    <td><%= link_to "Edit", edit_zone_booking_path(@zone, booking) %>
+    <td><%= link_to "Cancel", zone_booking_path(@zone, booking), data: { confirm: 'Are you sure?' }, method: :delete, class:'btn btn-danger' %>
     </td>
+    
   </tr>
   <% end %>
 </table>

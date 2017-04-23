@@ -1,16 +1,34 @@
-<h3>Booking Confirmation</h3>
-<p>Your booking is confirmed for
-  <%= @zone.name %> - <%= @zone.description %> 
-  <br>
-  Starts on: 
-  <%= @booking.start_time.strftime('%e %b %Y') %>
-  at <%= @booking.start_time.strftime('%H:%M%p') %> 
-  and ends at 
-  <%= (@booking.calculate_end_time + 60).strftime('%H:%M%p') %>
-  for
-   <%= @booking.duration %> hours 
-  at a cost of: 
-   <%= (@booking.calculate_cost) %> euro/s
+<div class="panel container">
+<h3 class="panel-heading">Booking Details</h3>
 
-<%= link_to 'Edit booking', edit_zone_booking_path(@zone, @booking) %> |
-<%= link_to 'Back', zone_bookings_path(@zone) %>
+ 
+ <div class="panel-body">
+  
+  <p>Your booking is confirmed for</p>
+ 
+  <p><strong><%= @zone.name %> - <%= @zone.description %> </strong></p>
+ 
+ <p>  Starts on: 
+  <strong> <%= @booking.start_time.strftime('%e %b %Y') %>
+  @ <%= @booking.start_time.strftime('%H:%M%p') %> </strong>
+  
+  and ends @  <%= (@booking.calculate_end_time + 60).strftime('%H:%M%p') %>
+  </p>
+  
+  <p>Your have booked <%= @zone.name %> for 
+   <%= @booking.duration %> hours 
+  </p>
+
+ <p>and the total cost is: </p>
+  
+  
+  <p class="panel-footer"> <%= icon('euro', class:'strong')%> <%= (@booking.calculate_cost) %> </p>
+  
+<%= link_to 'Edit booking', edit_zone_booking_path(@zone, @booking), class:'btn btn-warning' %> 
+<%= link_to '<< Back to all bookings', zone_bookings_path(@zone), class:'btn btn-success' %>
+ 
+ </div>
+
+ 
+</div>
+

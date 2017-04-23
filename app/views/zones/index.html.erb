@@ -2,7 +2,7 @@
 
 <h1>Listing Zones</h1>
 
-<table>
+<table class="table table-responsive table-hover">
   <thead>
     <tr>
       <th>Name</th>
@@ -16,13 +16,13 @@
       <tr>
         <td><%= zone.name %></td>
         <td><%= zone.description %></td>
-        <td><%= link_to 'Show All Bookings', zone_bookings_path(zone)%></td>
-        <td><%= link_to "Add booking", new_zone_booking_path(zone) %></td>
+        <td><%= link_to 'Show All Bookings', zone_bookings_path(zone), class: 'btn btn-info' %></td>
+        <td><%= link_to "Add booking", new_zone_booking_path(zone), class: 'btn btn-success' %></td>
         
         <% if current_user.admin? %>
-        <td><%= link_to 'New Zone', new_zone_path %></td>
-        <td><%= link_to 'Edit Zone', edit_zone_path(zone) %></td>
-        <td><%= link_to 'Delete Zone', zone, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'New Zone', new_zone_path, class: 'btn bg-success' %></td>
+        <td><%= link_to 'Edit Zone', edit_zone_path(zone), class:'btn btn-warning' %></td>
+        <td><%= link_to 'Delete Zone', zone, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
         <% end%>
       </tr>
     <% end %>
