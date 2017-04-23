@@ -18,8 +18,12 @@
         <td><%= zone.description %></td>
         <td><%= link_to 'Show All Bookings', zone_bookings_path(zone)%></td>
         <td><%= link_to "Add booking", new_zone_booking_path(zone) %></td>
+        
+        <% if current_user.admin? %>
+        <td><%= link_to 'New Zone', new_zone_path %></td>
         <td><%= link_to 'Edit Zone', edit_zone_path(zone) %></td>
         <td><%= link_to 'Delete Zone', zone, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end%>
       </tr>
     <% end %>
   </tbody>
@@ -27,4 +31,4 @@
 
 <br>
 
-<%= link_to 'New Zone', new_zone_path %>
+

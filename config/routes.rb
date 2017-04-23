@@ -2,17 +2,20 @@ Rails.application.routes.draw do
   
   resources :profiles
   devise_for :users
+  
   root :to => 'home#index'
   
-  #get 'bookings/index'
+  get '/signedinuserprofile' => 'profiles#signedinuserprofile'
+  
+  get 'bookings/index'
 
-  #get 'bookings/show'
+  get 'bookings/show'
 
-  #get 'bookings/new'
+  get 'bookings/new'
 
-  #get 'bookings/edit'
+  get 'bookings/edit'
 
-  #get 'bookings/_form'
+  get 'bookings/_form'
 
   resources :zones do
     resources :bookings

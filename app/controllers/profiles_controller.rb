@@ -15,6 +15,12 @@ class ProfilesController < ApplicationController
   # GET /profiles/new
   def new
     @profile = Profile.new
+    @profile.user_id = current_user.id
+    
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json {render json: @profile}
+    end
   end
 
   # GET /profiles/1/edit
@@ -61,6 +67,15 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def signedinuserprofile
+    profile = Profile.find_by_user_id(current_user.id)
+    if profile.nil?
+      redirect_to "/profiles/new"
+    else
+      @profile = Profile.find_by_user_id(current_user.id)
+      redirect_to "/profiles/#{@profile.id}"
+    end
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_profile
