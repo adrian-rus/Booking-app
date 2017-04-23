@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  start_time: 2017-04-23 13:45:01
+  end_time: 2017-04-23 13:45:01
+  duration: 1
+  description: MyText
+  cost: 9.99
+  zone_id: 
+
+two:
+  start_time: 2017-04-23 13:45:01
+  end_time: 2017-04-23 13:45:01
+  duration: 1
+  description: MyText
+  cost: 9.99
+  zone_id: 

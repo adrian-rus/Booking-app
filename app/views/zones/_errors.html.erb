@@ -1,0 +1,13 @@
+<% if @zone.errors.any? %>
+  <div class="errors">
+    <h3>
+      <%= pluralize(@zone.errors.count, 'error') %>
+      prohibited this zone from being saved:
+    </h3>
+    <ul>
+      <% @zone.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

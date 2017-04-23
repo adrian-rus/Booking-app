@@ -1,0 +1,16 @@
+<h3>Booking Confirmation</h3>
+<p>Your booking is confirmed for
+  <%= @zone.name %> - <%= @zone.description %> 
+  <br>
+  Starts on: 
+  <%= @booking.start_time.strftime('%e %b %Y') %>
+  at <%= @booking.start_time.strftime('%H:%M%p') %> 
+  and ends at 
+  <%= (@booking.calculate_end_time + 60).strftime('%H:%M%p') %>
+  for
+   <%= @booking.duration %> hours 
+  at a cost of: 
+   <%= (@booking.calculate_cost) %> euro/s
+
+<%= link_to 'Edit booking', edit_zone_booking_path(@zone, @booking) %> |
+<%= link_to 'Back', zone_bookings_path(@zone) %>
