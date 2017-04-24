@@ -1,5 +1,10 @@
 <div class="container">
+  
 <h1> Bookings for <%= @zone.name %></h1>
+
+<p class="notice bg-success"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    
 <%= form_tag(zone_bookings_path, :method => "get", class: "form-inline") do %>
   <%= text_field_tag :search, nil, :placeholder => "Search by Booking ID", class: "form-control"%>
   <%= submit_tag "Search", class: "btn btn-primary" %>

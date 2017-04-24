@@ -1,9 +1,11 @@
 <div class="container">
   <h1>My Profile</h1>
+  <p class="notice bg-success"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
 <div class="panel panel-default">
   
   <div class="panel-heading">
-     <%= image_tag(@profile.avatar, alt: "default avatar", class: 'img-responsive center-block') %>
+     <%= image_tag(@profile.avatar, alt: "default avatar", class: 'img-responsive img-rounded center-block', :style=>"max-width:250px") %>
   </div>
   
   <div class="panel-body text-center">

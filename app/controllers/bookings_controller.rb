@@ -8,9 +8,7 @@ class BookingsController < ApplicationController
   before_action :find_zone
   
   def index
-    #@bookings = Booking.where("zone_id = ? AND end_time >= ?", @zone.id, Time.now).order(:start_time)
-    #respond_with @bookings
-    @bookings = Booking.where('zone_id = ?', @zone.id).order(:start_time)
+    @bookings = Booking.where('zone_id = ? AND end_time >= ?', @zone.id, Time.now).order(:start_time) #ensure old bookings are not displayed
     if params[:search]
       @bookings = Booking.search(params[:search])
       @bookings = @bookings.order("start_time ASC")
