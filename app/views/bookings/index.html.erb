@@ -7,10 +7,10 @@
 <br>
 <table class="table table-responsive table-hover">
   <tr>
+    <th>Booking ID</th>
     <th>Start</th>
     <th>End</th>
     <th>Duration</th>
-    <th> User ID</th>
     <th>Cost</th>
     <th>Actions</th>
     
@@ -21,6 +21,9 @@
   <% if current_user.id == booking.user_id %>
   <tr>
     <td>
+      <%= booking.id %>
+    </td>
+    <td>
       <%= booking.start_time.strftime('%e %b %Y %H:%M%p') %>
     </td>
     <td>
@@ -29,11 +32,9 @@
     <td>
       <%= booking.duration %> hours
     </td>
-    <td>
-      <%= booking.user_id %>
-    </td>
+    
      <td>
-     <%= icon('euro', class:'strong')%> <%= (booking.calculate_cost) %>
+     <%= icon('euro', class:'strong')%> <%= (booking.cost) %>
     </td>
     
     <td><%= link_to "Show Details", zone_booking_path(@zone, booking), class:'btn btn-info' %>
@@ -47,6 +48,9 @@
   <% elsif current_user.admin? %>
   <tr>
     <td>
+      <%= booking.id %>
+    </td>
+    <td>
       <%= booking.start_time.strftime('%e %b %Y %H:%M%p') %>
     </td>
     <td>
@@ -55,11 +59,9 @@
     <td>
       <%= booking.duration %> hours
     </td>
-    <td>
-      <%= booking.user_id %>
-    </td>
+    
      <td>
-     <%= icon('euro', class:'strong')%> <%= (booking.calculate_cost) %>
+     <%= icon('euro', class:'strong')%> <%= (booking.cost) %>
     </td>
     
     <td><%= link_to "Show Details", zone_booking_path(@zone, booking), class:'btn btn-info' %>
@@ -74,6 +76,6 @@
   
   <% end %>
 </table>
-
-<%= link_to "<< Back to Zones", zones_path, class:'btn btn-success'%>
+<%= link_to 'Book Now', new_zone_booking_path, class: 'btn btn-success' %>
+<%= link_to "<< Back to Zones", zones_path, class:'btn btn-warning'%>
 </div>

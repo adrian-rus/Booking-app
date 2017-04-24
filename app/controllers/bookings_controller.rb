@@ -1,3 +1,4 @@
+require 'booking_decorator'
 require 'my_logger'
 class BookingsController < ApplicationController
   
@@ -23,9 +24,28 @@ class BookingsController < ApplicationController
   end
 
   def create
-    @booking =  Booking.new(params[:booking].permit(:zone_id, :start_time, :duration, :user_id))
+    @booking = Booking.new(params[:booking].permit(:zone_id, :start_time, :duration, :user_id))
     @booking.zone = @zone
     @booking.user_id = current_user.id
+    @booking.duration = params[:booking][:duration]
+    
+    myBooking = BasicBooking.new(1, 100)
+    
+    if params[:booking][:biggroup].to_s.length> 0 then
+      myBooking = BigGroupDecorator.new(myBooking)
+    end
+    
+    if params[:booking][:vip].to_s.length> 0 then
+      myBooking = VIPDecorator.new(myBooking)
+    end
+    
+    if params[:booking][:extravr].to_s.length> 0 then
+      myBooking = ExtraVRDecorator.new(myBooking)
+    end
+    
+    @booking.cost = (@booking.duration - 1)*100 + myBooking.cost
+    @booking.description = myBooking.details
+    
     if @booking.save
       redirect_to zone_bookings_path(@zone, method: :get)
     else
@@ -59,9 +79,34 @@ class BookingsController < ApplicationController
 
   def update
     @booking = Booking.find(params[:id])
-    # @booking.zone = @zone
-
-    if @booking.update(params[:booking].permit(:zone_id, :start_time, :duration))
+    
+    @booking.duration = params[:booking][:duration]
+    
+    myBooking = BasicBooking.new(1, 100)
+   
+    if params[:booking][:biggroup].to_s.length> 0 then
+      myBooking = BigGroupDecorator.new(myBooking)
+    end
+    
+    if params[:booking][:vip].to_s.length> 0 then
+      myBooking = VIPDecorator.new(myBooking)
+    end
+    
+    if params[:booking][:extravr].to_s.length> 0 then
+      myBooking = ExtraVRDecorator.new(myBooking)
+    end
+    
+    @booking.cost = (@booking.duration - 1)*100 + myBooking.cost
+    @booking.description = myBooking.details
+    
+    updated_information = {
+      'start_time' => @booking.start_time,
+      'cost' => @booking.cost,
+      'description' => @booking.description,
+      'duration' => @booking.duration
+    }
+  
+    if @booking.update(updated_information)
       flash[:notice] = 'Your booking was updated succesfully'
 
       if request.xhr?
@@ -73,17 +118,6 @@ class BookingsController < ApplicationController
       render 'edit'
     end
   end
-  
-=begin def userbookings
-    booking = Booking.find_by_user_id(current_user.id)
-    if booking.nil?
-      redirect_to "/zones/"
-    else
-      @zone = booking.zone_id
-      @booking = Booking.find_by_user_id(current_user.id)
-      redirect_to zone_bookings_path(@zone)
-    end
-=end
 
   private
 

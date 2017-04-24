@@ -19,3 +19,17 @@ A new booking with id 25 has been created for: 2017-05-10 13:00:00 UTC for 2 hou
 A new booking with id  has been created for: 2017-05-16 13:00:00 UTC for 3 hours.The user id is 2
 A new booking with id 26 has been created for: 2017-05-06 13:00:00 UTC for 3 hours.The user id is 2
 A new booking with id 27 has been created for: 2017-05-18 13:30:00 UTC for 1 hours.The user id is 1
+A new booking with id  has been created for: 2017-04-24 14:00:00 UTC for 4 hours.The user id is 1
+A new booking with id 28 has been created for: 2017-05-10 18:00:00 UTC for 4 hours.The user id is 1
+A new booking with id  has been created for:  for 3 hours.The user id is 1
+A new booking with id  has been created for:  for 3 hours.The user id is 1
+A new booking with id  has been created for:  for 3 hours.The user id is 1
+A new booking with id  has been created for:  for 3 hours.The user id is 1
+A new booking with id  has been created for:  for 3 hours.The user id is 1
+A new booking with id  has been created for:  for 3 hours.The user id is 1
+A new booking with id  has been created for:  for 3 hours.The user id is 1
+A new booking with id  has been created for:  for 3 hours.The user id is 1
+A new booking with id 29 has been created for: 2017-06-24 15:00:00 UTC for 2 hours.The user id is 1
+A new booking with id 30 has been created for: 2017-06-24 15:00:00 UTC for 3 hours.The user id is 1
+A new booking with id 31 has been created for: 2017-10-24 15:00:00 UTC for 3 hours.The user id is 1
+A new booking with id 32 has been created for: 2017-09-24 15:00:00 UTC for 4 hours.The user id is 1

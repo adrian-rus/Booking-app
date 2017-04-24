@@ -81,14 +81,6 @@ module Bookable
       self.end_time = start_time + (duration.hours - 60)
     end
   end
-  
-  def calculate_cost
-    cost = 100
-    duration = validate_duration
-    if duration
-      self.cost = cost * duration
-    end
-  end
 
   def as_json(options = {})  
    {  

@@ -8,25 +8,19 @@
  
  <div class="panel-body">
   
-  <p>Your booking is confirmed for</p>
- 
+  <p>Your booking is <strong>confirmed</strong> for: </p>
+  
   <p><strong><%= @zone.name %> - <%= @zone.description %> </strong></p>
  
- <p>  Starts on: 
-  <strong> <%= @booking.start_time.strftime('%e %b %Y') %>
-  @ <%= @booking.start_time.strftime('%H:%M%p') %> </strong>
-  
-  and ends @  <%= (@booking.calculate_end_time + 60).strftime('%H:%M%p') %>
-  </p>
+  <p>Please arrive on <strong> <%= @booking.start_time.strftime('%e %b %Y') %>
+  @ <%= @booking.start_time.strftime('%H:%M%p') %> </strong>  </p>
   
   <p>Your have booked <%= @zone.name %> for 
-   <%= @booking.duration %> hours 
+   <%= @booking.duration %> hours.
   </p>
 
- <p>and the total cost is: </p>
-  
-  
-  <p> <%= icon('euro', class:'strong')%> <%= (@booking.calculate_cost) %> </p>
+  <p>The total cost is:  <%= icon('euro', class:'strong')%> <%= (@booking.cost) %> </p>
+  <p> <strong> These are the extra features ordered: </strong><%= @booking.description %></p>
  
  </div>
  
