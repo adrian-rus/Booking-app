@@ -1,21 +1,24 @@
 <div class="container">
 <h1> Bookings for <%= @zone.name %></h1>
 <%= form_tag(zone_bookings_path, :method => "get", class: "form-inline") do %>
-  <%= text_field_tag :search, nil, :placeholder => "Search by Name", class: "form-control"%>
+  <%= text_field_tag :search, nil, :placeholder => "Search by Booking ID", class: "form-control"%>
   <%= submit_tag "Search", class: "btn btn-primary" %>
 <% end %>
 <br>
-<table class="bookings_table table table-responsive table-hover">
+<table class="table table-responsive table-hover">
   <tr>
     <th>Start</th>
     <th>End</th>
     <th>Duration</th>
+    <th> User ID</th>
     <th>Cost</th>
     <th>Actions</th>
-    <th colspan='7'></th>
+    
+    <th colspan='8'></th>
   </tr>
   
   <% @bookings.each do |booking| %>
+  <% if current_user.id == booking.user_id %>
   <tr>
     <td>
       <%= booking.start_time.strftime('%e %b %Y %H:%M%p') %>
@@ -25,6 +28,9 @@
     </td>
     <td>
       <%= booking.duration %> hours
+    </td>
+    <td>
+      <%= booking.user_id %>
     </td>
      <td>
      <%= icon('euro', class:'strong')%> <%= (booking.calculate_cost) %>
@@ -38,6 +44,34 @@
     </td>
     
   </tr>
+  <% elsif current_user.admin? %>
+  <tr>
+    <td>
+      <%= booking.start_time.strftime('%e %b %Y %H:%M%p') %>
+    </td>
+    <td>
+      <%= (booking.calculate_end_time + 60).strftime('%e %b %Y %H:%M%p') %>
+    </td>
+    <td>
+      <%= booking.duration %> hours
+    </td>
+    <td>
+      <%= booking.user_id %>
+    </td>
+     <td>
+     <%= icon('euro', class:'strong')%> <%= (booking.calculate_cost) %>
+    </td>
+    
+    <td><%= link_to "Show Details", zone_booking_path(@zone, booking), class:'btn btn-info' %>
+    </td>
+    <td><%= link_to "Amend", edit_zone_booking_path(@zone, booking), class:'btn btn-warning' %>
+    </td>
+    <td><%= link_to "Cancel", zone_booking_path(@zone, booking), data: { confirm: 'Are you sure?' }, method: :delete, class:'btn btn-danger' %>
+    </td>
+    
+  </tr>
+  <% end %>
+  
   <% end %>
 </table>
 

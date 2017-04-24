@@ -7,13 +7,14 @@ class BookingsController < ApplicationController
   before_action :find_zone
   
   def index
-    @bookings = Booking.where("zone_id = ? AND end_time >= ?", @zone.id, Time.now).order(:start_time)
-    respond_with @bookings
+    #@bookings = Booking.where("zone_id = ? AND end_time >= ?", @zone.id, Time.now).order(:start_time)
+    #respond_with @bookings
+    @bookings = Booking.where('zone_id = ?', @zone.id).order(:start_time)
     if params[:search]
       @bookings = Booking.search(params[:search])
-      @bookings = @bookings.order("created_at ASC")
+      @bookings = @bookings.order("start_time ASC")
     else
-      @bookings = @bookings.order("created_at DESC")
+      @bookings = @bookings.order("start_time DESC")
     end
   end
 
@@ -22,8 +23,9 @@ class BookingsController < ApplicationController
   end
 
   def create
-    @booking =  Booking.new(params[:booking].permit(:zone_id, :start_time, :duration))
+    @booking =  Booking.new(params[:booking].permit(:zone_id, :start_time, :duration, :user_id))
     @booking.zone = @zone
+    @booking.user_id = current_user.id
     if @booking.save
       redirect_to zone_bookings_path(@zone, method: :get)
     else
@@ -31,7 +33,9 @@ class BookingsController < ApplicationController
     end
     
     logger = MyLogger.instance
-    logger.logInformation("A new booking has been created on: " + @booking.start_time.to_s + " for " + @booking.duration.to_s + " hours.") 
+    logger.logInformation("A new booking with id "+@booking.id.to_s + 
+    " has been created for: " + @booking.start_time.to_s + " for " +
+    @booking.duration.to_s + " hours." + "The user id is " + @booking.user_id.to_s) 
     
   end
 
@@ -70,13 +74,13 @@ class BookingsController < ApplicationController
     end
   end
   
-=begin
-  def userbookings
-    user = User.find_by_user_id(current_user.id)
-    if user.booking_id.nil?
+=begin def userbookings
+    booking = Booking.find_by_user_id(current_user.id)
+    if booking.nil?
       redirect_to "/zones/"
     else
-      @user = User.find_by_user_id(current_user.id)
+      @zone = booking.zone_id
+      @booking = Booking.find_by_user_id(current_user.id)
       redirect_to zone_bookings_path(@zone)
     end
 =end

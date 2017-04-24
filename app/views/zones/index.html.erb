@@ -17,8 +17,9 @@
         
       <div class="panel-footer">
         
+        <%= link_to "Book now", new_zone_booking_path(zone), class: 'btn btn-success' %>
         <%= link_to 'Show All Bookings', zone_bookings_path(zone), class: 'btn btn-info' %>
-        <%= link_to "Add booking", new_zone_booking_path(zone), class: 'btn btn-success' %>
+        
         
         <% if current_user.admin? %>
         <%= link_to 'New Zone', new_zone_path, class: 'btn bg-success' %>
