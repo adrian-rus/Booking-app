@@ -1,34 +1,32 @@
+<div class="container">
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Zones</h1>
 
-<table class="table table-responsive table-hover">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+  
+    <h1>Zones</h1>
+  
     <% @zones.each do |zone| %>
-      <tr>
-        <td><%= zone.name %></td>
-        <td><%= zone.description %></td>
-        <td><%= link_to 'Show All Bookings', zone_bookings_path(zone), class: 'btn btn-info' %></td>
-        <td><%= link_to "Add booking", new_zone_booking_path(zone), class: 'btn btn-success' %></td>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3><%= zone.name %></h3>
+      </div>
+      
+      <div class="panel-body">
+        <%= zone.description %>
+      </div>
+        
+      <div class="panel-footer">
+        
+        <%= link_to 'Show All Bookings', zone_bookings_path(zone), class: 'btn btn-info' %>
+        <%= link_to "Add booking", new_zone_booking_path(zone), class: 'btn btn-success' %>
         
         <% if current_user.admin? %>
-        <td><%= link_to 'New Zone', new_zone_path, class: 'btn bg-success' %></td>
-        <td><%= link_to 'Edit Zone', edit_zone_path(zone), class:'btn btn-warning' %></td>
-        <td><%= link_to 'Delete Zone', zone, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+        <%= link_to 'New Zone', new_zone_path, class: 'btn bg-success' %>
+        <%= link_to 'Edit Zone', edit_zone_path(zone), class:'btn btn-warning' %>
+        <%= link_to 'Delete Zone', zone, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
         <% end%>
-      </tr>
+     </div>
+    </div>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-
+  
+</div>

@@ -9,6 +9,12 @@ class BookingsController < ApplicationController
   def index
     @bookings = Booking.where("zone_id = ? AND end_time >= ?", @zone.id, Time.now).order(:start_time)
     respond_with @bookings
+    if params[:search]
+      @bookings = Booking.search(params[:search])
+      @bookings = @bookings.order("created_at ASC")
+    else
+      @bookings = @bookings.order("created_at DESC")
+    end
   end
 
   def new

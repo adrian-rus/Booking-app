@@ -1,5 +1,9 @@
-<div class="panel container">
-<h3 class="panel-heading">Booking Details</h3>
+<br>
+<div class="container">
+ <div class="panel panel-success">
+<div class="panel-heading">
+ <h1>Booking Details</h1>
+ </div>
 
  
  <div class="panel-body">
@@ -22,13 +26,15 @@
  <p>and the total cost is: </p>
   
   
-  <p class="panel-footer"> <%= icon('euro', class:'strong')%> <%= (@booking.calculate_cost) %> </p>
-  
-<%= link_to 'Edit booking', edit_zone_booking_path(@zone, @booking), class:'btn btn-warning' %> 
-<%= link_to '<< Back to all bookings', zone_bookings_path(@zone), class:'btn btn-success' %>
+  <p> <%= icon('euro', class:'strong')%> <%= (@booking.calculate_cost) %> </p>
  
  </div>
-
  
+ <div class="panel-footer">
+<%= link_to 'Edit booking', edit_zone_booking_path(@zone, @booking), class:'btn btn-warning' %> 
+<%= link_to '<< Back to all bookings', zone_bookings_path(@zone), class:'btn btn-success' %>
+</div>
+
+ </div>
 </div>
 

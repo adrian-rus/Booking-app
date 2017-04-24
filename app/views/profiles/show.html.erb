@@ -1,10 +1,12 @@
-<div class="panel container">
+<div class="container">
+  <h1>My Profile</h1>
+<div class="panel panel-default">
   
-  <div class="panel-header">
-     <%= image_tag(@profile.avatar, alt: "default avatar", class: 'img-responsive') %>
+  <div class="panel-heading">
+     <%= image_tag(@profile.avatar, alt: "default avatar", class: 'img-responsive center-block') %>
   </div>
   
-  <div class="panel-body">
+  <div class="panel-body text-center">
     <p>
       <strong>First name:</strong>
       <%= @profile.firstname %>
@@ -27,6 +29,7 @@
     </p>
   </div>
 
+<div class="panel-footer text-center">
     <%= link_to 'Edit Profile', edit_profile_path(@profile), class:'btn btn-warning'%>
   
   			<!-- displaying a link to all profiles if user is admin -->
@@ -35,6 +38,10 @@
 			<%= link_to '<< Back to all profiles', profiles_path, class: 'btn btn-success' %>
 		
 		<% end %>
+		
+		</div>
+
+</div>
 
 </div>
 

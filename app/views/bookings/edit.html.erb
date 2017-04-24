@@ -1,7 +1,12 @@
-<h3>Edit booking for <%= @zone.name %></h3>
-
+<div class="container">
 <%= render 'errors' %>
+
+<h1>Edit booking for <%= @zone.name %></h1>
+
+
 <%= render 'form' %>
 
 <%= link_to '<< Back to all bookings', zone_bookings_path(@zone), class:'btn btn-success' %>
 <%= link_to '<< Back to all zones', zones_path, class:'btn btn-warning' %>
+
+</div>
