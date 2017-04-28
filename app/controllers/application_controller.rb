@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   
+  # adding a method to redirect the user to his/hers profile page
   def after_sign_in_path_for(resource)
     "/signedinuserprofile"
   end
