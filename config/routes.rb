@@ -16,6 +16,10 @@ Rails.application.routes.draw do
   get 'bookings/edit'
 
   get 'bookings/_form'
+  
+  get '/contact' => 'home#contact'
+  
+  get '/show_all_bookings' => 'bookings#show_all'
 
   resources :zones do
     resources :bookings

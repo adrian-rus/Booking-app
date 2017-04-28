@@ -1,0 +1,51 @@
+
+<div class="container">
+    
+    <% if current_user.admin? %>
+        <h1>Listing All Bookings</h1>
+    <% else %>
+        <h1> Bookings for <%= current_user.profile.firstname %> <%= current_user.profile.lastname %></h1>
+    <% end %>
+    
+    <br>
+        
+        <table class="table table-responsive table-hover">
+            <tr>
+                <th>Zone</th>  
+                <th>Arrive at</th>
+                <th>Cost</th>
+                <th>Description</th>
+                <% if current_user.admin? %>
+                    <th>Booked by</th>
+                    <th>Booking Created on</th>
+                <% end %>
+                
+                <th>Amend</th>
+                <th>Cancel</th>
+            </tr>
+          	<% for booking in Booking.all.order("start_time ASC") %>
+	            <% for zone in Zone.all.order("name ASC") %>
+	                <tr>
+	                    <% if (booking.user_id == current_user.id || current_user.admin?) %>
+		                    <td><strong><%= zone.name %></strong></td>
+		                    <td><%= booking.start_time.strftime('%e %b %Y %H:%M%p')%></td>
+	                        <td><%= icon('euro', class:'strong')%> <%= booking.cost %></td>
+	                        <td><%= booking.description %></td>
+	                    <% end %>
+	                    <% if current_user.admin? %>
+	                        <td>User id <%= booking.user_id %></td>
+	                        <td><%= booking.created_at.strftime('%e %b %Y %H:%M%p') %></td>
+	                    <% end %>
+	                    <% if (booking.user_id == current_user.id || current_user.admin?)%>
+	                    
+	                        <td><%= link_to "Amend", edit_zone_booking_path(zone, booking), class:'btn btn-warning' %></td>
+                            <td><%= link_to "Cancel", zone_booking_path(zone, booking), data: { confirm: 'Are you sure?' }, method: :delete, class:'btn btn-danger' %></td>
+	           
+	                    <% end %>
+	                </tr>
+	            <% end %>
+	        <% end %>    
+        </table>        
+    
+    <br>
+</div>

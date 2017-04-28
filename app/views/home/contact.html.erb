@@ -1,0 +1,74 @@
+<div class="container">
+    <br>
+    <div class="row">
+    
+        <div class="col-md-4">
+            <h1>Contact Details</h1>
+            <p>
+               <address>
+            VR World, Inc.<br>
+              Mayor Street, IFSC<br>
+              Dublin 1, D01 Y300<br>
+            <%= icon('phone', class: 'strong')%> Phone: (123) 456-7890<br>
+            <%= icon('envelope', class: 'strong')%>Email: <a href="mailto:info@vrworld.ie">info@vrworld.ie</a>
+               </address>
+            </p>
+            
+            <ul class="list-unstyled list-inline list-social-icons">
+               <li><a href="http://www.facebook.com" class="btn btn-lg"><%= icon('facebook', class: 'strong')%></a></li>
+
+        	    <li><a href="http://www.twitter.com" class="btn btn-lg"><%= icon('twitter', class: 'strong')%></a></li>
+        
+                <li><a href="http://www.youtube.com" class="btn btn-lg"><%= icon('youtube', class: 'strong')%></i> </a></li>
+            </ul>
+        </div>
+        
+        <div class="col-md-8">
+            <img class="img-responsive"
+                src="https://maps.googleapis.com/maps/api/staticmap?
+                center=53.348945,-6.243211&zoom=16&markers=color:red%7Clabel:
+                G%7C53.348945,-6.243211&size=600x300&
+                key=AIzaSyBoJL1OwZHp2ND1HddY0dS_R7ZAS_DwoL4"/>
+        </div>
+        
+    </div>
+    
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>Send us a Message</h1>
+            <form class="form-horizontal" novalidate>
+                <div class="form-group">
+                    
+                        <label>Full Name:</label>
+                        <input type="text" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    
+                        <label>Phone Number:</label>
+                        <input type="tel" class="form-control" id="phone" required data-validation-required-message="Please enter your phone number.">
+                    
+                </div>
+                <div class=" form-group">
+                    
+                        <label>Email Address:</label>
+                        <input type="email" class="form-control" id="email" required data-validation-required-message="Please enter your email address.">
+                    
+                </div>
+                <div class=" form-group">
+                    
+                        <label>Message:</label>
+                        <textarea rows="10" cols="100" class="form-control" id="message" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none"></textarea>
+                    
+                </div>
+        
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+            <br>
+        </div>
+     
+
+    </div>
+    
+
+</div>

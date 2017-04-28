@@ -1,14 +1,19 @@
 <div class="container">
-  <h1>My Profile</h1>
-  <p class="notice bg-success"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-<div class="panel panel-default">
+  <div class="row">
+  <h1>Hello <%= @profile.firstname %> <%= @profile.lastname %> ! </h1>
+  </div>
+  
+  <div class="row">
+  <div class="col-sm-8 col-md-6">
+  
+<div class="panel panel-default text-center">
   
   <div class="panel-heading">
      <%= image_tag(@profile.avatar, alt: "default avatar", class: 'img-responsive img-rounded center-block', :style=>"max-width:250px") %>
+     
   </div>
   
-  <div class="panel-body text-center">
+  <div class="panel-body">
     <p>
       <strong>First name:</strong>
       <%= @profile.firstname %>
@@ -24,26 +29,39 @@
       <%= @profile.address %>
     </p>
     
-    <p>
-      <strong>User:</strong>
-      <%= @profile.firstname %>
-      <%= @profile.lastname %>
-    </p>
+    
   </div>
 
-<div class="panel-footer text-center">
-    <%= link_to 'Edit Profile', edit_profile_path(@profile), class:'btn btn-warning'%>
-  
-  			<!-- displaying a link to all profiles if user is admin -->
-  	<% if user_signed_in? && current_user.admin?%>
-  		
-			<%= link_to '<< Back to all profiles', profiles_path, class: 'btn btn-success' %>
-		
-		<% end %>
+<div class="panel-footer">
 		
 		</div>
 
 </div>
+</div>
 
+<div class="col-sm-4 col-md-4">
+  <div class="panel-body">
+  <%= link_to 'Edit Profile', edit_profile_path(@profile), class:'btn btn-warning btn-block'%>
+  <br>
+				<a href="/show_all_bookings" class="btn btn-info btn-block">Check My Bookings</a>
+    <br>
+    <%= link_to 'Book Your Next Adventure', zones_path, class:'btn btn-danger btn-block'%>
+    <br>
+    
+    
+  			<!-- displaying a link to all profiles if user is admin -->
+  	<% if user_signed_in? && current_user.admin?%>
+  	<h3>Admin zone:</h3>
+  		
+			<%= link_to 'Show all Profiles', profiles_path, class: 'btn btn-success btn-block' %> <br>
+			
+			<%= link_to 'Show all Zones', zones_path, class:"btn btn-info btn-block" %> <br>
+			
+			<a href="/show_all_bookings" class="btn btn-warning btn-block">Check All Bookings</a>
+		
+		<% end %>
+		</div>
+</div>
+</div>
 </div>
 

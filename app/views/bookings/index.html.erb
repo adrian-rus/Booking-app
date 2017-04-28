@@ -2,83 +2,42 @@
   
 <h1> Bookings for <%= @zone.name %></h1>
 
-<p class="notice bg-success"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    
 <%= form_tag(zone_bookings_path, :method => "get", class: "form-inline") do %>
   <%= text_field_tag :search, nil, :placeholder => "Search by Booking ID", class: "form-control"%>
   <%= submit_tag "Search", class: "btn btn-primary" %>
 <% end %>
+
 <br>
+
 <table class="table table-responsive table-hover">
   <tr>
     <th>Booking ID</th>
-    <th>Start</th>
-    <th>End</th>
+    <th>Booked by</th>
+    <th>Arrive at</th>
     <th>Duration</th>
     <th>Cost</th>
-    <th>Actions</th>
-    
-    <th colspan='8'></th>
+    <th>Booked on</th>
+    <th>Show details</th>
+    <th>Amend</th>
+    <th>Cancel</th>
   </tr>
   
   <% @bookings.each do |booking| %>
-  <% if current_user.id == booking.user_id %>
+  <% if current_user.id == booking.user_id || current_user.admin? %>
   <tr>
-    <td>
-      <%= booking.id %>
-    </td>
-    <td>
-      <%= booking.start_time.strftime('%e %b %Y %H:%M%p') %>
-    </td>
-    <td>
-      <%= (booking.calculate_end_time + 60).strftime('%e %b %Y %H:%M%p') %>
-    </td>
-    <td>
-      <%= booking.duration %> hours
-    </td>
+    <td><%= booking.id %></td>
+    <td><%= booking.user_id %></td>
+    <td><%= booking.start_time.strftime('%e %b %Y %H:%M%p') %></td>
+    <td><%= booking.duration %> hours </td>
+    <td><%= icon('euro', class:'strong')%> <%= (booking.cost) %></td>
+    <td><%= booking.created_at.strftime('%e %b %Y %H:%M%p') %> </td>
     
-     <td>
-     <%= icon('euro', class:'strong')%> <%= (booking.cost) %>
-    </td>
-    
-    <td><%= link_to "Show Details", zone_booking_path(@zone, booking), class:'btn btn-info' %>
-    </td>
-    <td><%= link_to "Amend", edit_zone_booking_path(@zone, booking), class:'btn btn-warning' %>
-    </td>
-    <td><%= link_to "Cancel", zone_booking_path(@zone, booking), data: { confirm: 'Are you sure?' }, method: :delete, class:'btn btn-danger' %>
-    </td>
-    
-  </tr>
-  <% elsif current_user.admin? %>
-  <tr>
-    <td>
-      <%= booking.id %>
-    </td>
-    <td>
-      <%= booking.start_time.strftime('%e %b %Y %H:%M%p') %>
-    </td>
-    <td>
-      <%= (booking.calculate_end_time + 60).strftime('%e %b %Y %H:%M%p') %>
-    </td>
-    <td>
-      <%= booking.duration %> hours
-    </td>
-    
-     <td>
-     <%= icon('euro', class:'strong')%> <%= (booking.cost) %>
-    </td>
-    
-    <td><%= link_to "Show Details", zone_booking_path(@zone, booking), class:'btn btn-info' %>
-    </td>
-    <td><%= link_to "Amend", edit_zone_booking_path(@zone, booking), class:'btn btn-warning' %>
-    </td>
-    <td><%= link_to "Cancel", zone_booking_path(@zone, booking), data: { confirm: 'Are you sure?' }, method: :delete, class:'btn btn-danger' %>
-    </td>
+    <td><%= link_to "Show Details", zone_booking_path(@zone, booking), class:'btn btn-info' %></td>
+    <td><%= link_to "Amend", edit_zone_booking_path(@zone, booking), class:'btn btn-warning' %></td>
+    <td><%= link_to "Cancel", zone_booking_path(@zone, booking), data: { confirm: 'Are you sure?' }, method: :delete, class:'btn btn-danger' %></td>
     
   </tr>
   <% end %>
-  
   <% end %>
 </table>
 <%= link_to 'Book Now', new_zone_booking_path, class: 'btn btn-success' %>

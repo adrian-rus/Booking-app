@@ -1,14 +1,14 @@
 <div class="container">
-<p id="notice"><%= notice %></p>
-
 
   
-    <h1>Zones</h1>
+    <h1>Pick a Zone</h1>
   
     <% @zones.each do |zone| %>
-    <div class="panel panel-primary">
+    <div class="col-sm-4">
+    <div class="panel panel-primary" style="min-height:300px">
       <div class="panel-heading">
         <h3><%= zone.name %></h3>
+    
       </div>
       
       <div class="panel-body">
@@ -17,19 +17,21 @@
         
       <div class="panel-footer">
         
-        <%= link_to "Book now", new_zone_booking_path(zone), class: 'btn btn-success' %>
-        <%= link_to 'Show All Bookings', zone_bookings_path(zone), class: 'btn btn-info' %>
+        <%= link_to "Book now", new_zone_booking_path(zone), class: 'btn btn-success btn-block' %>
+        <%= link_to 'Show Bookings', zone_bookings_path(zone), class: 'btn btn-info btn-block' %>
         
         
         <% if current_user.admin? %>
         
-        <%= link_to 'Edit Zone', edit_zone_path(zone), class:'btn btn-warning' %>
-        <%= link_to 'Delete Zone', zone, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+        <%= link_to 'Edit Zone', edit_zone_path(zone), class:'btn btn-warning btn-block' %>
+        <%= link_to 'Delete Zone', zone, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-block' %>
+        
         <% end%>
+        </div>
+        </div>
      </div>
-    </div>
     <% end %>
   <% if user_signed_in? && current_user.admin?%>
-  <%= link_to 'New Zone', new_zone_path, class: 'btn bg-primary' %>
+    <%= link_to 'New Zone', new_zone_path, class: 'btn bg-primary' %>
   <%end%>
 </div>

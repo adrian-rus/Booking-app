@@ -8,9 +8,13 @@
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 </head>
 <body>
-  
+
   <%= render 'shared/navbar' %>
-  <%= render 'shared/logindetails' %>
+  
+<div class="container">
+  <div id="notice" class="bg-success"><%= notice %></div>
+  <div class="bg-danger"><%= alert %></div>
+</div>
 
 <%= yield %>
 

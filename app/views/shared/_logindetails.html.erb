@@ -1,14 +1,9 @@
-<div class="container-fluid bg-info">
-    <% if user_signed_in? %>
-    <div class="text-right">
-      Signed in as... <%= current_user.email %>
-      (<%= link_to 'Sign out', destroy_user_session_path,
-        :method => :delete%>)
-    </div>
-  <% else %>
-  <div class="text-right">
-    <%= link_to 'Register', new_user_registration_path %> or
-    <%= link_to 'Sign in', new_user_session_path %>
-  </div>
-  <% end %>
-</div>
+<!-- displaying the profile link only if the user is logged in -->
+			<% if user_signed_in? %>
+				<li><a href="/show_all_bookings">Bookings</a></li>
+				<li><a href="/signedinuserprofile">My Profile</a></li>
+	      		<li><%= link_to 'Sign out', destroy_user_session_path,:method => :delete %></li>
+       		<% else %>
+    			<li><%= link_to 'Register', new_user_registration_path %></li>
+      			<li><%= link_to 'Sign in', new_user_session_path %></li>
+			<% end %>
