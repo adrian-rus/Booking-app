@@ -70,12 +70,14 @@ class ProfilesController < ApplicationController
     end
   end
   
+  # method to check if the current user is admin
   def ensure_admin
     unless current_user && current_user.admin?
     render :text => "Access Denied! You must be an Administrator. ", :status => :unauthorized
     end
   end
-
+  
+  #method that redirects the user to his profile or to create a profile if he does not have one
   def signedinuserprofile
     profile = Profile.find_by_user_id(current_user.id)
     if profile.nil?

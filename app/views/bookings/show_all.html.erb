@@ -1,4 +1,5 @@
 <div class="container">
+    <!--checks what type of user is logged in and diplays the adequate heading-->
     <% if current_user.admin? %>
         <h1>Listing All Bookings</h1>
     <% else %>
@@ -6,8 +7,10 @@
     <% end %>
     
     <br>
-        
-        <table class="table table-responsive table-hover">
+<div class="row">
+  <div class="col-sm-12">
+    <div class="table-responsive">
+        <table class="table table-striped">
             <tr>
                 <th>Zone</th>  
                 <th>Arrive at</th>
@@ -21,8 +24,10 @@
                 <th>Amend</th>
                 <th>Cancel</th>
             </tr>
-          	<% for booking in Booking.all.order("start_time ASC") %>
-	            <% for zone in Zone.all.order("name ASC") %>
+            <!--using 2 for loops to iterate through all bookings and zones and builds up a table-->
+          	<% for booking in Booking.all.where('end_time >= ?', Time.now).order(:start_time) %> 
+          	<!--ensures that booking from the past are not displayed-->
+	            <% for zone in Zone.all.order(:name) %>
 	                <tr>
 	                    <% if (booking.user_id == current_user.id || current_user.admin?) %>
 		                    <td><strong><%= zone.name %></strong></td>
@@ -34,6 +39,7 @@
 	                        <td>User id <%= booking.user_id %></td>
 	                        <td><%= booking.created_at.strftime('%e %b %Y %H:%M%p') %></td>
 	                    <% end %>
+	                    <!--only the user who created the booking or an admin have the right to edit or cancel a booking-->
 	                    <% if (booking.user_id == current_user.id || current_user.admin?)%>
 	                    
 	                        <td><%= link_to "Amend", edit_zone_booking_path(zone, booking), class:'btn btn-warning' %></td>
@@ -43,7 +49,10 @@
 	                </tr>
 	            <% end %>
 	        <% end %>    
-        </table>        
+        </table>  
+        </div>
+        </div>
+        </div>
     
     <br>
 </div>

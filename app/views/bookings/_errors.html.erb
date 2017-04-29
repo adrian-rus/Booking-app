@@ -1,9 +1,9 @@
 <% if @booking.errors.any? %>
-  <div class="errors bg-warning">
+  <div class="errors bg-warning container text-center">
     <h3><%= pluralize(@booking.errors.count, 'error') %>
       prohibited this booking from being saved:
     </h3>
-    <ul>
+    <ul class="list-unstyled">
       <% @booking.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>

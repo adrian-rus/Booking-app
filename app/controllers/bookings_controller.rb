@@ -2,31 +2,41 @@ require 'booking_decorator'
 require 'my_logger'
 class BookingsController < ApplicationController
   
+  #adding filter so the bookings are only visible after the user logs in
   before_filter :authenticate_user!
-  
   respond_to :html, :xml, :json
+  
+  #before any action is taken the zone id must be found
   before_action :find_zone
   
+  # GET zones/1/bookings
   def index
     @bookings = Booking.where('zone_id = ? AND end_time >= ?', @zone.id, Time.now).order(:start_time) #ensure bookings in the past are not displayed
     if params[:search]
+      #select all the bookings which match the search pattern
       @bookings = Booking.search(params[:search])
+      
+      #order the selected rows ascending by start_time field
       @bookings = @bookings.order("start_time ASC")
     else
+      #order the rows descending by start_time field
       @bookings = @bookings.order("start_time DESC")
     end
   end
-
+  
+  # GET zones/1/bookings/new
   def new
     @booking = Booking.new(zone_id: @zone.id)
   end
-
+  
+  # POST zones/1/bookings
   def create
     @booking = Booking.new(params[:booking].permit(:zone_id, :start_time, :duration, :user_id))
     @booking.zone = @zone
     @booking.user_id = current_user.id
     @booking.duration = params[:booking][:duration]
     
+    # create an instance/object of a BasicBooking
     myBooking = BasicBooking.new(1, 100)
     
     if params[:booking][:biggroup].to_s.length> 0 then
@@ -50,6 +60,7 @@ class BookingsController < ApplicationController
       render 'new'
     end
     
+    #retrieve the instance of MyLogger class
     logger = MyLogger.instance
     logger.logInformation("A new booking with id "+@booking.id.to_s + 
     " has been created for: " + @booking.start_time.to_s + " for " +
@@ -57,10 +68,12 @@ class BookingsController < ApplicationController
     
   end
 
+  #GET zones/1/bookings/1
   def show
     @booking = Booking.find(params[:id])
   end
 
+  # DELETE zones/1/bookings/1
   def destroy
     @booking = Booking.find(params[:id]).destroy
     if @booking.destroy
@@ -71,15 +84,17 @@ class BookingsController < ApplicationController
     end
   end
 
+  # GET zones/1/bookings/2/edit
   def edit
     @booking = Booking.find(params[:id])
   end
-
+  
+  # PUT zones/1/bookings/2
   def update
     @booking = Booking.find(params[:id])
-    
     @booking.duration = params[:booking][:duration]
     
+    # create an instance/object of a BasicBooking
     myBooking = BasicBooking.new(1, 100)
    
     if params[:booking][:biggroup].to_s.length> 0 then
@@ -94,9 +109,11 @@ class BookingsController < ApplicationController
       myBooking = ExtraVRDecorator.new(myBooking)
     end
     
+    # update the cost and the description 
     @booking.cost = (@booking.duration - 1)*100 + myBooking.cost
     @booking.description = myBooking.details
     
+    # build a hash with the updated information of the booking
     updated_information = {
       'start_time' => @booking.start_time,
       'cost' => @booking.cost,

@@ -51,3 +51,5 @@ A new booking with id 35 has been created for: 2017-09-26 19:00:00 UTC for 2 hou
 ##############################
 A new booking with id 36 has been created for: 2017-08-24 20:00:00 UTC for 2 hours.The user id is 1
 A new booking with id 37 has been created for: 2017-04-28 20:00:00 UTC for 2 hours.The user id is 1
+A new booking with id  has been created for: 2017-05-06 15:00:00 UTC for 2 hours.The user id is 1
+A new booking with id  has been created for: 2017-05-06 15:00:00 UTC for 2 hours.The user id is 1

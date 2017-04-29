@@ -6,20 +6,24 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-
+<!--renders the navbar partial-->
   <%= render 'shared/navbar' %>
   
+<!--alerts and notices container-->
 <div class="container">
   <div id="notice" class="bg-success"><%= notice %></div>
-  <div class="bg-danger"><%= alert %></div>
+  <div class="bg-danger" id="alert"><%= alert %></div>
 </div>
 
+<!--renders the content of the page-->
 <%= yield %>
 
 <br>
 
+<!--renders the footer partial-->
 <%= render 'shared/footer' %>
 
 </body>

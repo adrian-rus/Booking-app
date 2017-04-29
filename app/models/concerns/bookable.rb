@@ -1,17 +1,21 @@
 module Bookable
   extend ActiveSupport::Concern
-
+  # this modules ensures that the Zone is bookable
+  # meaning that it checks that booking do not overlap
   included do
     belongs_to :zone
-
+    
+    # attributes that are being validated
+    
     validates :start_time, presence: true 
     validates :duration, presence: true, numericality: { greater_than: 0 }
     validate :start_date_cannot_be_in_the_past
     validate :overlaps
 
+    # before validation is started the calculate_end_time method is ran
     before_validation :calculate_end_time
   
-
+    # checks if a new booking ends during another booking
     scope :end_during, ->(new_start_time, new_end_time) do
       if (!new_start_time.nil?) && (!new_end_time.nil?)
         where('end_time > ? AND end_time < ?', new_start_time, new_end_time)
@@ -20,6 +24,7 @@ module Bookable
       end
     end
 
+    # checks if a new booking starts during another booking
     scope :start_during, ->(new_start_time, new_end_time) do
       if (!new_start_time.nil?) && (!new_end_time.nil?)
         where('start_time > ? AND start_time < ?', new_start_time, new_end_time)
@@ -27,7 +32,8 @@ module Bookable
         return nil
       end
     end
-
+    
+    # checks if a new booking starts or ends during another booking
     scope :happening_during, ->(new_start_time, new_end_time) do
       if (!new_start_time.nil?) && (!new_end_time.nil?)
         where('start_time > ? AND end_time < ?', new_start_time, new_end_time)
@@ -43,7 +49,8 @@ module Bookable
         return nil
       end
     end
-
+    
+    # checks if a new booking has identical times as another booking
     scope :identical, ->(new_start_time, new_end_time) do
       if (!new_start_time.nil?) && (!new_end_time.nil?)
         where('start_time = ? AND end_time = ?', new_start_time, new_end_time)
@@ -53,6 +60,7 @@ module Bookable
     end
   end
 
+  # checks for slots overlapping
   def overlaps
     overlapping_bookings = [ 
       zone.bookings.end_during(start_time, end_time),
@@ -67,13 +75,15 @@ module Bookable
       errors.add(:base, 'Slot has already been booked')
     end
   end
-
+  
+  # bookings must start at least 15 minutes in the future
   def start_date_cannot_be_in_the_past
     if start_time && start_time < DateTime.now + (15.minutes)
-      errors.add(:start_time, 'must be at least 15 minutes from present time')
+      errors.add(:start_time, 'Booking must start at least 15 minutes from present time')
     end
   end
-
+  
+  # calculates when the booking ends according with the duration
   def calculate_end_time
     start_time = validate_start_time
     duration = validate_duration

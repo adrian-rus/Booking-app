@@ -2,14 +2,17 @@
   
 <h1> Bookings for <%= @zone.name %></h1>
 
+<!-- search bookings by booking ID-->
 <%= form_tag(zone_bookings_path, :method => "get", class: "form-inline") do %>
   <%= text_field_tag :search, nil, :placeholder => "Search by Booking ID", class: "form-control"%>
   <%= submit_tag "Search", class: "btn btn-primary" %>
 <% end %>
 
 <br>
-
-<table class="table table-responsive table-hover">
+<div class="row">
+  <div class="col-sm-12">
+    <div class="table-responsive">
+      <table class="table table-striped">
   <tr>
     <th>Booking ID</th>
     <th>Booked by</th>
@@ -22,7 +25,10 @@
     <th>Cancel</th>
   </tr>
   
+  <!--running through all bookings and displaying them-->
   <% @bookings.each do |booking| %>
+  
+  <!--displays only the bookings for the logged in user or all the bookings for an admin user-->
   <% if current_user.id == booking.user_id || current_user.admin? %>
   <tr>
     <td><%= booking.id %></td>
@@ -40,6 +46,10 @@
   <% end %>
   <% end %>
 </table>
+    </div>
+  </div>
+</div>
+
 <%= link_to 'Book Now', new_zone_booking_path, class: 'btn btn-success' %>
 <%= link_to "<< Back to Zones", zones_path, class:'btn btn-warning'%>
 </div>
