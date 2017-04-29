@@ -1,6 +1,6 @@
 <div class="container">
 
-  
+  <div class="row">
     <h1>Pick a Zone</h1>
   
     <% @zones.each do |zone| %>
@@ -31,7 +31,12 @@
         </div>
      </div>
     <% end %>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
   <% if user_signed_in? && current_user.admin?%>
     <%= link_to 'New Zone', new_zone_path, class: 'btn bg-primary' %>
   <%end%>
+  </div>
+  </div>
 </div>
