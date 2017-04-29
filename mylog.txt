@@ -53,3 +53,11 @@ A new booking with id 36 has been created for: 2017-08-24 20:00:00 UTC for 2 hou
 A new booking with id 37 has been created for: 2017-04-28 20:00:00 UTC for 2 hours.The user id is 1
 A new booking with id  has been created for: 2017-05-06 15:00:00 UTC for 2 hours.The user id is 1
 A new booking with id  has been created for: 2017-05-06 15:00:00 UTC for 2 hours.The user id is 1
+A new booking with id 38 has been created for: 2017-07-29 15:00:00 UTC for 3 hours.The user id is 2
+############### BookingObserver Log update:#
++++ BookingObserver: The booking 26 for 2017-05-06 13:00:00 UTC has been updated. The cost is now: 300.0
+##############################
+############### BookingObserver Log update:#
++++ BookingObserver: The booking 25 for 2017-05-10 13:00:00 UTC has been updated. The cost is now: 800.0
+##############################
+A new booking with id 39 has been created for: 2017-06-29 15:00:00 UTC for 2 hours.The user id is 2
